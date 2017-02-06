@@ -1,0 +1,19 @@
+Version control software, or git to work
+========================================================
+author: Niklas Mähler
+date: `r format(Sys.time(), "%Y-%m-%d")`
+autosize: true
+
+Version control software
+========================================================
+
+- Initially created for software development
+- Some of the most used ones are
+  - Subversion (SVN)
+  - Mercurial
+  - Git
+
+More reading
+========================================================
+
+- Pro Git (https://git-scm.com/book/en/v2)
