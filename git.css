@@ -1,0 +1,14 @@
+.reveal section .column .fig,
+.reveal section .fig {
+  border: none;
+  box-shadow: none;
+}
+
+.space-left {
+  margin-left: 15px;
+}
+
+.center {
+  display: block;
+  margin: inherit auto;
+}
