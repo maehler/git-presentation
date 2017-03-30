@@ -1,16 +1,3 @@
-.reveal section .fig,
-.reveal .slides section .column .fig {
-  height: 150px;
-  border: none;
-  box-shadow: none;
-}
-
-.space-left {
-  margin-left: 15px;
-}
-
-.reveal section .center,
-.reveal .slides section .column .center {
-  display: block;
-  margin: 0 auto;
+.reveal section img.plain {
+  background: none;
 }
