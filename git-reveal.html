@@ -272,7 +272,11 @@
   <script type="text/javascript" src="gitgraph.js/src/gitgraph.js"></script>
   <script type="text/javascript">
     Reveal.initialize({
-      history: true
+      history: true,
+      dependencies: [
+        { src: 'reveal.js/plugin/notes/notes.js', async: true }
+      ]
+    });
 
     var branchgraph = new GitGraph({
       template: 'metro',
