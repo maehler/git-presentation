@@ -5,6 +5,7 @@
     <title>I know what I did last summer</title>
     <link rel="stylesheet" href="reveal.js/css/reveal.css">
     <link rel="stylesheet" href="reveal.js/css/theme/solarized.css">
+    <link rel="stylesheet" href="gitgraph.js/src/gitgraph.css">
     <link rel="stylesheet" href="git.css">
   </head>
   <body>
@@ -160,6 +161,44 @@
               <li class="fragment"><code>git push</code>: push changes to remote repository</li>
               <li class="fragment"><code>git pull</code>: get changes from remote repository</li>
             </ul>
+
+            <aside class="notes">
+              There are <i>many</i> more commands available, but these are perhaps the ones that are used more regularly
+            </aside>
+          </section>
+
+          <section>
+            <h2>Branching</h2>
+
+            <ul>
+              <li><code>git branch</code>: create a new branch</li>
+              <li><code>git merge</code>: join branches</li>
+              <li><code>git checkout</code>: move to commit or branch</li>
+            </ul>
+
+            <!-- <img src="img/master.png" class="stretch plain" style="float: right">
+            <img src="img/master_branch.png" class="stretch plain fragment" style="float: right"> -->
+            <canvas id="branch-canvas" style="margin-top: 50px" width=600></canvas>
+            <span class="fragment" id="branch-commit1"></span>
+            <span class="fragment" id="branch-commit2"></span>
+            <span class="fragment" id="branch-commit3"></span>
+            <span class="fragment" id="branch-branch1"></span>
+            <span class="fragment" id="branch-commit1-1"></span>
+            <span class="fragment" id="branch-commit4"></span>
+            <span class="fragment" id="branch-commit1-2"></span>
+            <span class="fragment" id="branch-merge"></span>
+
+            <aside class="notes">
+              Commit history can be seen as a tree structure, and trees have branches.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Help!</h2>
+
+            <p><code>git help [command]</code></p>
+            <p class="fragment"><code>git help commit</code></p>
+            <p class="fragment"><code>git help push</code></p>
           </section>
         </section>
 
@@ -230,9 +269,49 @@
 
   <script type="text/javascript" src="reveal.js/lib/js/head.min.js"></script>
   <script type="text/javascript" src="reveal.js/js/reveal.js"></script>
+  <script type="text/javascript" src="gitgraph.js/src/gitgraph.js"></script>
   <script type="text/javascript">
     Reveal.initialize({
       history: true
+
+    var branchgraph = new GitGraph({
+      template: 'metro',
+      orientation: 'horizontal',
+      mode: 'compact',
+      elementId: 'branch-canvas',
+      author: 'Niklas <niklas.mahler@umu.se>'
+    });
+
+    var master = branchgraph.branch('master');
+    var newbranch;
+
+    Reveal.addEventListener('fragmentshown', function(event) {
+      switch (event.fragment.id) {
+        case 'branch-commit1':
+        case 'branch-commit2':
+        case 'branch-commit3':
+        case 'branch-commit4':
+          master.checkout();
+          branchgraph.commit();
+          break;
+
+        case 'branch-branch1':
+          newbranch = branchgraph.branch('new-branch');
+          break;
+
+        case 'branch-commit1-1':
+        case 'branch-commit1-2':
+          newbranch.checkout()
+          branchgraph.commit()
+          break;
+
+        case 'branch-merge':
+          newbranch.merge(master);
+          break;
+
+        default:
+          break;
+      }
     });
   </script>
 </html>
